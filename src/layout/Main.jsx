@@ -33,9 +33,7 @@ class Main extends Component {
     return (
       <main className="container content">
         <h1>Collection example</h1>
-        {
-          items.length ? <FilmList items={items} /> : null
-        }
+        {items.length ? <FilmList items={items} /> : null}
       </main>
     );
   }

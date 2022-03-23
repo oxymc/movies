@@ -4,9 +4,9 @@ function FilmList(props) {
   return (
     <div className="row fogrid">
       {
-        props.items.map( item => {
+        props.items.map(item => {
           return <FilmItem key={item.imdbID} {...item} />
-        } )
+        })
       }
     </div>
   );
