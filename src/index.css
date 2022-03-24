@@ -14,15 +14,32 @@ code {
 * {
   box-sizing: border-box;
 }
+h1 {
+  text-transform: capitalize;
+}
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+nav .brand-logo {
+  white-space: nowrap;
+}
 main {
   min-height: calc(100vh - 108px - 65px);
 }
 .card {
   text-transform: capitalize;
 }
+.card .card-image {
+  height: 340px; 
+  background-color: black;
+  display: flex;
+  align-items: center;
+}
 .card .card-image img {
-  max-height: 340px;
-  object-fit: cover;
+  max-height: 100%;
+  object-fit: contain;
 }
 .card .card-image .card-title {
   background-color: rgba(0,0,0,0.75);
@@ -35,6 +52,7 @@ main {
 }
 .card .card-action {
   border: none;
+  padding: 16px;
 }
 .foFlex {
   display: flex;
@@ -42,12 +60,20 @@ main {
 }
 .fogrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   grid-gap: 1rem;
 }
 .preloader-wrapper.big.active {
     margin: 4rem auto;
     display: block;
+}
+.chboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  grid-gap: 0.8rem;
+}
+.chboxes [type="radio"]+span {
+  padding-left: 25px;
 }
 .row input:focus + label {
   -webkit-transform: translateY(-14px) scale(0.8);
