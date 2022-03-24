@@ -1,5 +1,7 @@
 import { Component } from "react";
 import FilmList from "../components/FilmList";
+import Loader from "../components/Loader";
+import Search from "../components/Search";
 
 class Main extends Component {
 
@@ -28,12 +30,26 @@ class Main extends Component {
       )
   }
 
+  onSearch = (value) => {
+    fetch(`http://www.omdbapi.com/?apikey=3a36a7d6&s=${value}`)
+    .then(res => res.json())
+    .then(
+      (result) => {
+        this.setState({
+          isLoaded: true,
+          items: result.Search
+        });
+      }
+    )
+  }
+
   render() {
     const {isLoaded, items} = this.state
     return (
       <main className="container content">
         <h1>Collection example</h1>
-        {items.length ? <FilmList items={items} /> : null}
+        <Search onSearch={this.onSearch}/>
+        {items.length ? <FilmList items={items} /> : <Loader />}
       </main>
     );
   }

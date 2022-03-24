@@ -28,9 +28,30 @@ main {
   background-color: rgba(0,0,0,0.75);
   width: 100%;
 }
+.card .card-image + div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card .card-action {
+  border: none;
+}
+.foFlex {
+  display: flex;
+  align-items: center;
+}
 .fogrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 1rem;
 }
-
+.preloader-wrapper.big.active {
+    margin: 4rem auto;
+    display: block;
+}
+.row input:focus + label {
+  -webkit-transform: translateY(-14px) scale(0.8);
+  transform: translateY(-14px) scale(0.8);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}

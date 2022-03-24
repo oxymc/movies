@@ -10,11 +10,13 @@ function FilmItem(props) {
               <img src={Poster} />
               <span className="card-title">{Title}</span>
             </div>
-            <div className="card-content">
-              <p>{Type}</p>
-            </div>
-            <div className="card-action">
-              <span>Year: {Year}</span>
+            <div>
+              <span className="card-content">
+                {Type}
+              </span>
+              <span className="card-action">
+                Year: {Year}
+              </span>
             </div>
           </div>
         </div>
