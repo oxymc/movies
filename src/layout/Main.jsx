@@ -13,7 +13,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    fetch("http://www.omdbapi.com/?apikey=3a36a7d6&s=test")
+    fetch("https://www.omdbapi.com/?apikey=3a36a7d6&s=test")
       .then(res => res.json())
       .then(
         (result) => {
@@ -29,11 +29,14 @@ class Main extends Component {
           });
         }
       )
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   onSearch = (name, type = 'all') => {
     const typeCheck = (type === 'all' ? '' : '&type='+type)
-    fetch(`http://www.omdbapi.com/?apikey=3a36a7d6&s=${name+typeCheck}`)
+    fetch(`https://www.omdbapi.com/?apikey=3a36a7d6&s=${name+typeCheck}`)
     .then(res => res.json())
     .then(
       (result) => {
@@ -44,6 +47,9 @@ class Main extends Component {
         });
       }
     )
+    .catch((error) => {
+      console.error(error)
+    })
   }
 
   render() {
