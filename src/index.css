@@ -53,6 +53,7 @@ main {
 .card .card-action {
   border: none;
   padding: 16px;
+  white-space: nowrap;
 }
 .foFlex {
   display: flex;

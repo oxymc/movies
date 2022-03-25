@@ -6,7 +6,7 @@ import NoResults from "../components/NoResults";
 
 class Main extends Component {
   state = {
-    isLoaded: false,
+    loading: true,
     items: [],
     error: null,
     header: 'Collection example'
@@ -17,14 +17,13 @@ class Main extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.Search
-          });
+          this.setState( 
+            {items: result.Search, loading: false}
+          )
         },
         (error) => {
           this.setState({
-            isLoaded: true,
+            loading: false,
             error
           });
         }
@@ -35,16 +34,15 @@ class Main extends Component {
   }
 
   onSearch = (name, type = 'all') => {
+    this.setState({loading: true})
     const typeCheck = (type === 'all' ? '' : '&type='+type)
     fetch(`https://www.omdbapi.com/?apikey=3a36a7d6&s=${name+typeCheck}`)
     .then(res => res.json())
     .then(
-      (result) => {
-        this.setState({
-          isLoaded: true,
-          items: result.Search,
-          header: name +' '+ '['+type+']'
-        });
+      (result) => {  
+        this.setState( 
+          {header: name +' '+ '['+type+']', items: result.Search, loading: false}
+        )
       }
     )
     .catch((error) => {
@@ -53,15 +51,20 @@ class Main extends Component {
   }
 
   render() {
-    const {items, header} = this.state
+    const {loading, items, header} = this.state
     return (
       <main className="container content">
-        <h1>{header}</h1>
+        <h1>{loading ? <Loader /> : header}</h1>
         <Search onSearch={this.onSearch}/>
-        {items && items.length ? 
-          <FilmList items={items} /> : 
-          !items ? <NoResults /> :
-          <Loader />}
+        {
+          loading ? 
+            <Loader /> : 
+            (items && items.length) ? 
+            <FilmList items={items} /> : 
+            !items ? 
+              <NoResults /> :
+              <Loader /> 
+        }
       </main>
     );
   }
