@@ -7,7 +7,7 @@ function FilmItem(props) {
         <div id={imdbID} className="">
           <div className="card">
             <div className="card-image">
-              <img src={Poster} />
+              <img src={Poster} alt={Title}/>
               <span className="card-title">{Title}</span>
             </div>
             <div>

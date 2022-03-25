@@ -53,7 +53,7 @@ class Main extends Component {
   }
 
   render() {
-    const {isLoaded, items, header} = this.state
+    const {items, header} = this.state
     return (
       <main className="container content">
         <h1>{header}</h1>

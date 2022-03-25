@@ -7,8 +7,9 @@ function Footer() {
           <a 
             className="grey-text text-lighten-4 right" 
             target="_blank" 
-            href="https://gitlab.com/skiff4ek/movies">
-              GitLab
+            rel="noreferrer"
+            href="https://github.com/oxymc/movies">
+              GitHub
           </a>
           </div>
         </div>
