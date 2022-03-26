@@ -11,34 +11,37 @@ class Main extends Component {
     loading: true,
     items: [],
     error: null,
-    header: 'Collection example'
+    header: 'Collection example',
+    showFilters: false
   }
+  defaultApi = () => fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=test`)
+  .then(res => res.json())
+  .then(
+    (result) => {
+      this.setState(
+        {items: result.Search, loading: false, showFilters: false}
+      )
+    },
+    (error) => {
+      this.setState({
+        loading: false,
+        error
+      });
+    }
+  )
+  .catch((error) => {
+    console.error(error)
+  })
 
   componentDidMount() {
-    fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=test`)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState(
-            {items: result.Search, loading: false}
-          )
-        },
-        (error) => {
-          this.setState({
-            loading: false,
-            error
-          });
-        }
-      )
-      .catch((error) => {
-        console.error(error)
-      })
+    this.defaultApi()
   }
 
   onReqCheck = () => {
     document.getElementById('search').focus()
     this.setState({
-      header: 'Fill the search input'
+      header: 'Fill the search input',
+      showFilters: false
     })
   }
 
@@ -50,7 +53,7 @@ class Main extends Component {
     .then(
       (result) => {
         this.setState(
-          {header: `${name} ['${type}']`, items: result.Search, loading: false}
+          {header: name, items: result.Search, loading: false, showFilters: true}
         )
       }
     )
@@ -58,20 +61,34 @@ class Main extends Component {
       console.error(error)
     })
   }
+  
+  toHomePage = () => {
+    this.defaultApi()
+    this.setState({
+      header: 'Collection example',
+      showFilters: false
+    })
+  } 
 
   render() {
-    const {loading, items, header} = this.state
+    const {loading, items, header, showFilters} = this.state
     return (
       <main className="container content">
         <h1>{loading ? <Loader /> : header}</h1>
-        <Search onSearch={this.onSearch} onReqCheck={this.onReqCheck}/>
+        <Search 
+          items={items} 
+          showFilters={showFilters}
+          onSearch={this.onSearch} 
+          onReqCheck={this.onReqCheck}
+          toHomePage={this.toHomePage}
+        />
         {
           loading ?
             <Loader /> :
             (items && items.length) ?
             <FilmList items={items} /> :
             !items ?
-              <NoResults /> :
+              <NoResults toHomePage={this.toHomePage} /> :
               <Loader />
         }
       </main>

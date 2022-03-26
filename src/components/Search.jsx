@@ -2,7 +2,7 @@ import React from "react";
 
 class Search extends React.Component {
   state = {
-    search: 'test',
+    search: '',
     filter: 'all',
   }
   checkField = (e) => {
@@ -23,7 +23,7 @@ class Search extends React.Component {
     }
     else {
       this.props.onReqCheck();
-      return null
+      return null 
     }
   }
   onPressRadio = (e) => {
@@ -31,10 +31,12 @@ class Search extends React.Component {
       this.props.onReqCheck();
       return null
     }
-    this.setState({
-      filter: e.target.name
-    })
-    this.props.onSearch(this.state.search, e.target.name);
+    if(this.props.items) {
+      this.setState({
+        filter: e.target.name
+      })
+      this.props.onSearch(this.state.search, e.target.name);
+    }
   }
 
   render() {
@@ -56,32 +58,35 @@ class Search extends React.Component {
               Search
           </button>
         </div>
+        {this.props.items && this.props.showFilters ?
         <div className="chboxes">
-          <label>
-            <input 
-              name="all" 
-              type="radio"
-              checked={this.state.filter === 'all' ? true : false}
-              onChange={this.onPressRadio} />
-            <span>All</span>
-          </label>
-          <label>
-            <input 
-              name="movie" 
-              type="radio"
-              checked={this.state.filter === 'movie' ? true : false}
-              onChange={this.onPressRadio} />
-            <span>Movies</span>
-          </label>
-          <label>
-            <input 
-              name="series" 
-              type="radio" 
-              checked={this.state.filter === 'series' ? true : false}
-              onChange={this.onPressRadio} />
-            <span>Series</span>
-          </label>
-        </div>
+        <label>
+          <input 
+            name="all" 
+            type="radio"
+            checked={this.state.filter === 'all' ? true : false}
+            onChange={this.onPressRadio} />
+          <span>All</span>
+        </label>
+        <label>
+          <input 
+            name="movie" 
+            type="radio"
+            checked={this.state.filter === 'movie' ? true : false}
+            onChange={this.onPressRadio} />
+          <span>Movies</span>
+        </label>
+        <label>
+          <input 
+            name="series" 
+            type="radio" 
+            checked={this.state.filter === 'series' ? true : false}
+            onChange={this.onPressRadio} />
+          <span>Series</span>
+        </label>
+      </div>
+        :
+      null}
       </>
     )
   }
