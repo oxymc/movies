@@ -4,6 +4,8 @@ import Loader from "../components/Loader";
 import Search from "../components/Search";
 import NoResults from "../components/NoResults";
 
+const API_KEY = process.env.REACT_APP_API_KEY
+
 class Main extends Component {
   state = {
     loading: true,
@@ -13,7 +15,7 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    fetch("https://www.omdbapi.com/?apikey=3a36a7d6&s=test")
+    fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=test`)
       .then(res => res.json())
       .then(
         (result) => {
@@ -36,7 +38,7 @@ class Main extends Component {
   onSearch = (name, type = 'all') => {
     this.setState({loading: true})
     const typeCheck = (type === 'all' ? '' : '&type='+type)
-    fetch(`https://www.omdbapi.com/?apikey=3a36a7d6&s=${name+typeCheck}`)
+    fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${name+typeCheck}`)
     .then(res => res.json())
     .then(
       (result) => {  
