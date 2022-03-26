@@ -19,7 +19,7 @@ class Main extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          this.setState( 
+          this.setState(
             {items: result.Search, loading: false}
           )
         },
@@ -41,9 +41,9 @@ class Main extends Component {
     fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&s=${name+typeCheck}`)
     .then(res => res.json())
     .then(
-      (result) => {  
-        this.setState( 
-          {header: name +' '+ '['+type+']', items: result.Search, loading: false}
+      (result) => {
+        this.setState(
+          {header: `${name} ['${type}']`, items: result.Search, loading: false}
         )
       }
     )
@@ -59,13 +59,13 @@ class Main extends Component {
         <h1>{loading ? <Loader /> : header}</h1>
         <Search onSearch={this.onSearch}/>
         {
-          loading ? 
-            <Loader /> : 
-            (items && items.length) ? 
-            <FilmList items={items} /> : 
-            !items ? 
+          loading ?
+            <Loader /> :
+            (items && items.length) ?
+            <FilmList items={items} /> :
+            !items ?
               <NoResults /> :
-              <Loader /> 
+              <Loader />
         }
       </main>
     );
