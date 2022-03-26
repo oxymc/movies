@@ -21,8 +21,16 @@ class Search extends React.Component {
     if(this.state.search) {
       this.props.onSearch(this.state.search, this.state.filter);
     }
+    else {
+      this.props.onReqCheck();
+      return null
+    }
   }
   onPressRadio = (e) => {
+    if(!this.state.search) {
+      this.props.onReqCheck();
+      return null
+    }
     this.setState({
       filter: e.target.name
     })

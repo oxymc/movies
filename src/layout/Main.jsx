@@ -35,6 +35,13 @@ class Main extends Component {
       })
   }
 
+  onReqCheck = () => {
+    document.getElementById('search').focus()
+    this.setState({
+      header: 'Fill the search input'
+    })
+  }
+
   onSearch = (name, type = 'all') => {
     this.setState({loading: true})
     const typeCheck = (type === 'all' ? '' : '&type='+type)
@@ -57,7 +64,7 @@ class Main extends Component {
     return (
       <main className="container content">
         <h1>{loading ? <Loader /> : header}</h1>
-        <Search onSearch={this.onSearch}/>
+        <Search onSearch={this.onSearch} onReqCheck={this.onReqCheck}/>
         {
           loading ?
             <Loader /> :
