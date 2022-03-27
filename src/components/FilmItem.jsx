@@ -1,13 +1,16 @@
 function FilmItem(props) {
   const {Title, Year, imdbID, Type, Poster} = props;
+  const checkImg = Poster === 'N/A' ? 'hidden' : null
   return (
     <>
       {
-        Poster === 'N/A' ? null : 
         <div id={imdbID} className="">
           <div className="card">
             <div className="card-image">
-              <img src={Poster} alt={Title}/>
+              <img 
+                className={checkImg}
+                src={Poster} 
+                alt={Title}/>
               <span className="card-title">{Title}</span>
             </div>
             <div>

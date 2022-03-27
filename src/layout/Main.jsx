@@ -73,8 +73,7 @@ class Main extends Component {
   render() {
     const {loading, items, header, showFilters} = this.state
     return (
-      <main className="container content">
-        <h1>{loading ? <Loader /> : header}</h1>
+      <main className="container content"> 
         <Search 
           items={items} 
           showFilters={showFilters}
@@ -82,6 +81,7 @@ class Main extends Component {
           onReqCheck={this.onReqCheck}
           toHomePage={this.toHomePage}
         />
+        <h1>{header}</h1>
         {
           loading ?
             <Loader /> :
