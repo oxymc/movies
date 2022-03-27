@@ -29,7 +29,7 @@ nav .brand-logo {
   white-space: nowrap;
 }
 main {
-  min-height: calc(100vh - 108px - 65px);
+  min-height: calc(100vh - 154px);
 }
 .listItems {
   margin-top: 20px;
